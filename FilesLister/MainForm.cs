@@ -32,6 +32,7 @@ namespace FilesLister
 
         private async void btnStart_Click(object sender, EventArgs e)
         {
+            btnStart.Enabled = false;
             progressBar.Visible = true;
 
             var startParamaters = new SearchParamaters
@@ -45,11 +46,19 @@ namespace FilesLister
                 OpenWhenDone = checkOpenWhenDone.Checked,
             };
 
-            await Task.Run(() =>
+            try
             {
-                DoWork(startParamaters);
-            });
+                await Task.Run(() =>
+                {
+                    DoWork(startParamaters);
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
+            btnStart.Enabled = true;
             progressBar.Visible = false;
         }
 
