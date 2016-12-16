@@ -14,7 +14,7 @@ namespace FilesLister
 {
     public partial class MainForm : Form
     {
-        public struct SearchParamaters
+        private struct SearchParamaters
         {
             public string Extension { get; set; }
             public string StartPath { get; set; }
